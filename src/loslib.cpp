@@ -117,6 +117,10 @@ static int os_getenv (lua_State *L) {
   return 1;
 }
 
+/* [jarina] hacking to compile under symbian */
+#ifndef CLOCKS_PER_SEC
+#define CLOCKS_PER_SEC 128
+#endif
 
 static int os_clock (lua_State *L) {
   lua_pushnumber(L, ((lua_Number)clock())/(lua_Number)CLOCKS_PER_SEC);
