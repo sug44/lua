@@ -4,181 +4,164 @@
 # For details see the COPYRIGHT file distributed with LuaDist.
 # Please note that the package source code is licensed under its own license.
 
-project ( lua C )
-cmake_minimum_required ( VERSION 2.6 )
-include ( dist.cmake )
+# Changed by Vinicius Jarina (viniciusjarina@gmail.com)
 
-## CONFIGURATION
-# Default configuration (we assume POSIX by default)
-set ( LUA_PATH "LUA_PATH" CACHE STRING "Environment variable to use as package.path." )
-set ( LUA_CPATH "LUA_CPATH" CACHE STRING "Environment variable to use as package.cpath." )
-set ( LUA_INIT "LUA_INIT" CACHE STRING "Environment variable for initial script." )
+PROJECT ( lua CXX )
+CMAKE_MINIMUM_REQUIRED ( VERSION 2.6 )
 
-option ( LUA_ANSI "Use only ansi features." OFF )
-option ( LUA_USE_RELATIVE_LOADLIB "Use modified loadlib.c with support for relative paths on posix systems." ON)
-set ( LUA_IDSIZE 60 CACHE NUMBER "gives the maximum size for the description of the source." )
-set ( LUA_PROMPT "> " CACHE STRING "Is the default prompt used by stand-alone Lua." )
-set ( LUA_PROMPT2 ">> " CACHE STRING "Is the default continuation prompt used by stand-alone Lua." )
-set ( LUA_MAXINPUT 512 CACHE NUMBER "Is the maximum length for an input line in the stand-alone interpreter.")
+IF (CMAKE_SIZEOF_VOID_P EQUAL 8)
+	SET (LIB_SUFFIX "64" CACHE STRING "Suffix of the directory name, e.g. 64 for lib64")
+ELSE (CMAKE_SIZEOF_VOID_P EQUAL 8)
+	SET (LIB_SUFFIX "" CACHE STRING "Suffix of the directory name, e.g. 64 for lib64")
+ENDIF (CMAKE_SIZEOF_VOID_P EQUAL 8)
 
-#2DO: LUAI_* and LUAL_* settings, for now defaults are used.
-  
-set ( LUA_DIRSEP "/" )
-set ( LUA_MODULE_SUFFIX ${CMAKE_SHARED_MODULE_SUFFIX} )
-set ( LUA_LDIR ${INSTALL_LMOD} )
-set ( LUA_CDIR ${INSTALL_CMOD} )
 
-if ( LUA_USE_RELATIVE_LOADLIB )
-  # This will set up relative paths to lib
-  string ( REGEX REPLACE "[^!/]+" ".." LUA_DIR "!/${INSTALL_BIN}/" )
-else ()
-  # Direct path to installation
-  set ( LUA_DIR ${CMAKE_INSTALL_PREFIX} CACHE STRING "Destination from which modules will be resolved. See INSTALL_LMOD and INSTALL_CMOD.")
-endif ()
+SET(CMAKE_DEBUG_POSTFIX "d")
+SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib${LIB_SUFFIX}" CACHE STRING "Library build output directory")
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib${LIB_SUFFIX}")
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin${LIB_SUFFIX}")
+SET(EXECUTABLE_OUTPUT_PATH         "${CMAKE_BINARY_DIR}/bin${LIB_SUFFIX}")
 
-set ( LUA_PATH_DEFAULT "./?.lua;${LUA_DIR}${LUA_LDIR}/?.lua;${LUA_DIR}${LUA_LDIR}/?/init.lua;./?/init.lua" )
-set ( LUA_CPATH_DEFAULT "./?${LUA_MODULE_SUFFIX};${LUA_DIR}${LUA_CDIR}/?${LUA_MODULE_SUFFIX};${LUA_DIR}${LUA_CDIR}/loadall${LUA_MODULE_SUFFIX}" )
+SET (LIB_LUA_VER "51" CACHE STRING "Suffix of version (for library name) e.g lua51")
 
-if ( WIN32 AND NOT CYGWIN )
+
+IF ( WIN32 AND NOT CYGWIN )
   # Windows systems
-  option ( LUA_WIN "Windows specific build." ON )
-  option ( LUA_BUILD_WLUA "Build wLua interpretter without console output." ON)
-  option ( LUA_BUILD_AS_DLL "Build Lua library as Dll." ON )
-  # Paths (Double escapes needed)
-  set ( LUA_DIRSEP "\\\\" )
-  string ( REPLACE "/" ${LUA_DIRSEP} LUA_DIR "${LUA_DIR}" )
-  string ( REPLACE "/" ${LUA_DIRSEP} LUA_LDIR "${LUA_LDIR}" )
-  string ( REPLACE "/" ${LUA_DIRSEP} LUA_CDIR "${LUA_CDIR}" )
-  string ( REPLACE "/" ${LUA_DIRSEP} LUA_PATH_DEFAULT "${LUA_PATH_DEFAULT}" )
-  string ( REPLACE "/" ${LUA_DIRSEP} LUA_CPATH_DEFAULT "${LUA_CPATH_DEFAULT}" )
-else ()
+  OPTION ( LUA_WIN "Windows specific build." ON )
+  OPTION ( LUA_BUILD_AS_DLL "Build  Lua library as Dll." ON )
+  
+ELSE ()
   # Posix systems (incl. Cygwin)
-  option ( LUA_USE_POSIX "Use POSIX functionality." ON )
-  option ( LUA_USE_DLOPEN "Use dynamic linker to load modules." ON )
-  option ( LUA_USE_MKSTEMP "Use mkstep." ON )
-  option ( LUA_USE_ISATTY "Use tty." ON )
-  option ( LUA_USE_POPEN "Use popen." ON )
-  option ( LUA_USE_ULONGJMP "Use ulongjmp" ON)
-endif ()
+  OPTION ( LUA_USE_POSIX "Use POSIX functionality." ON )
+  OPTION ( LUA_USE_DLOPEN "Use dynamic linker to load modules." ON )
+  
+ENDIF ()
 
-## SETUP
-# Optional libraries
-find_package ( Readline )
-if ( READLINE_FOUND )
-  option ( LUA_USE_READLINE "Use readline in the Lua CLI." ON )
-endif ()
-
-find_package ( Curses )
-if ( CURSES_FOUND )
-  option ( LUA_USE_CURSES "Use curses in the Lua CLI." ON )
-endif ()
-
-# Setup needed variables and libraries
-if ( LUA_USE_POSIX )
+IF ( LUA_USE_POSIX )
   # On POSIX Lua links to standard math library "m"
-  list ( APPEND LIBS m )
-endif ()
+  LIST ( APPEND LIBS m )
+ENDIF ()
 
-if ( LUA_USE_DLOPEN )
+IF ( LUA_USE_DLOPEN )
   # Link to dynamic linker library "dl"
-  list ( APPEND LIBS dl )
-endif ()
+  LIST ( APPEND LIBS dl )
+ENDIF ()
 
-if ( LUA_WIN )
+IF ( LUA_WIN )
   # Add extra rc files to the windows build
-  if ( MSVC OR MINGW )
-    set ( LUA_DEF src/lua.def )
-    set ( LUA_DLL_RC src/lua_dll.rc )
-    set ( LUA_RC src/lua.rc )
-    set ( LUAC_RC src/luac.rc )
-  endif ()
-endif ()
+  IF ( MSVC OR MINGW )
+    SET ( LUA_DLL_RC src/lua_dll.rc )
+    SET ( LUA_RC src/lua.rc )
+    SET ( LUAC_RC src/luac.rc )
+  ENDIF ()
+ENDIF ()
 
-if ( LUA_USE_READLINE )
-  # Add readline
-  include_directories ( ${READLINE_INCLUDE_DIR} )
-  list ( APPEND LIBS ${READLINE_LIBRARY} )
-endif ()
-
-if ( LUA_USE_CURSES )
-  # Add curses
-  include_directories ( ${CURSES_INCLUDE_DIR} )
-  list ( APPEND LIBS ${CURSES_LIBRARY} )
-endif ()
-
-## SOURCES
-# Generate luaconf.h
-configure_file ( src/luaconf.h.in ${CMAKE_CURRENT_BINARY_DIR}/luaconf.h )
 
 # Sources and headers
-include_directories ( src ${CMAKE_CURRENT_BINARY_DIR} )
-set ( SRC_LIB src/lapi.c src/lcode.c src/ldebug.c src/ldo.c src/ldump.c src/lfunc.c src/lgc.c src/llex.c src/lmem.c src/lobject.c src/lopcodes.c src/lparser.c src/lstate.c src/lstring.c src/ltable.c src/ltm.c src/lundump.c src/lvm.c src/lzio.c src/lauxlib.c src/lbaselib.c src/ldblib.c src/liolib.c src/lmathlib.c src/loslib.c src/ltablib.c src/lstrlib.c src/linit.c )
-set ( SRC_LUA src/lua.c )
-set ( SRC_LUAC src/luac.c src/print.c )
+INCLUDE_DIRECTORIES ( src ${CMAKE_CURRENT_BINARY_DIR} )
+SET (   SRC_LIB 
+		src/lapi.cpp
+		src/lauxlib.cpp
+		src/lbaselib.cpp
+		src/lcode.cpp
+		src/ldblib.cpp
+		src/ldebug.cpp
+		src/ldo.cpp
+		src/ldump.cpp
+		src/lfunc.cpp
+		src/lgc.cpp
+		src/linit.cpp
+		src/liolib.cpp
+		src/llex.cpp
+		src/lmathlib.cpp
+		src/lmem.cpp
+		src/loadlib.cpp
+		src/lobject.cpp
+		src/lopcodes.cpp
+		src/loslib.cpp
+		src/lparser.cpp
+		src/lstate.cpp
+		src/lstring.cpp
+		src/lstrlib.cpp
+		src/ltable.cpp
+		src/ltablib.cpp
+		src/ltm.cpp
+		src/lundump.cpp
+        src/lvm.cpp
+	    src/lzio.cpp
+		src/print.cpp
+)
 
-if ( LUA_USE_RELATIVE_LOADLIB )
-  # Use modified loadlib
-  list ( APPEND SRC_LIB src/loadlib_rel.c )
-else ()
-  list ( APPEND SRC_LIB src/loadlib.c )
-endif ()
+SET ( SRC_LUA  src/lua.cpp )
+SET ( SRC_LUAC src/luac.cpp )
 
 ## BUILD
-# Create dynamic library
-add_library ( liblua SHARED ${SRC_LIB} ${LUA_DLL_RC} ${LUA_DEF} )
-target_link_libraries ( liblua ${LIBS} )
-set_target_properties ( liblua PROPERTIES OUTPUT_NAME lua CLEAN_DIRECT_OUTPUT 1 )
+# Create dynamic library (dll, so)
 
-# Create static library, this is needed to compile luac in the 5.1.x Lua series
-add_library ( liblua_static STATIC ${SRC_LIB} )
-target_link_libraries ( liblua_static ${LIBS} )
+ADD_LIBRARY ( liblua SHARED ${SRC_LIB} ${LUA_DLL_RC})
 
-add_executable ( lua ${SRC_LUA} ${LUA_RC} )
-target_link_libraries ( lua liblua )
+TARGET_LINK_LIBRARIES ( liblua ${LIBS} )
+SET_TARGET_PROPERTIES ( liblua PROPERTIES OUTPUT_NAME lua${LIB_LUA_VER} CLEAN_DIRECT_OUTPUT 1 )
 
-# On windows a variant of the lua interpreter without console output needs to be built
-if(LUA_BUILD_WLUA)
-  add_executable ( wlua WIN32 ${SRC_LUA} ${LUA_RC} )
-  target_link_libraries ( wlua liblua )  
-  install_executable ( wlua )
-endif()
+if ( LUA_WIN )
+	SET_TARGET_PROPERTIES ( liblua PROPERTIES COMPILE_FLAGS -DLUA_BUILD_AS_DLL)
+endif ( LUA_WIN )
 
-add_executable ( luac ${SRC_LUAC} ${LUAC_RC} )
-target_link_libraries ( luac liblua_static )
+SET_TARGET_PROPERTIES(  liblua PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_MINSIZEREL ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES(  liblua PROPERTIES LIBRARY_OUTPUT_DIRECTORY_MINSIZEREL ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES(  liblua PROPERTIES RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL ${PROJECT_BINARY_DIR}/bin${LIB_SUFFIX} )
 
-install_executable ( lua luac )
-install_library ( liblua )
-install_data ( README COPYRIGHT HISTORY )
-install_lua_module ( strict etc/strict.lua )
-install_header (src/lua.h src/lualib.h src/lauxlib.h etc/lua.hpp ${CMAKE_CURRENT_BINARY_DIR}/luaconf.h  )
-install_doc ( doc/ )
-install_foo ( etc/ )
-install_test ( test/ )
+SET_TARGET_PROPERTIES(  liblua PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES(  liblua PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES(  liblua PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_BINARY_DIR}/bin${LIB_SUFFIX} )
 
-## TESTS
-set(LUA lua) 
+SET_TARGET_PROPERTIES(  liblua PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_RELWITHDEBINFO ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES(  liblua PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELWITHDEBINFO ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES(  liblua PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${PROJECT_BINARY_DIR}/bin${LIB_SUFFIX} )
 
-add_lua_test ( test/bisect.lua )
-add_lua_test ( test/cf.lua )
-add_lua_test ( test/echo.lua )
-add_lua_test ( test/env.lua )
-add_lua_test ( test/factorial.lua )
-add_lua_test ( test/fib.lua 20 )
-add_lua_test ( test/fibfor.lua )
-#add_lua_test ( test/globals.lua ) # Requires input
-add_lua_test ( test/hello.lua )
-file(READ test/life.lua _data)  # life.lua test, with reduced run-time.
-string(REPLACE "40,20" "20,15" _data "${_data}")
-string(REPLACE 2000 20 _data "${_data}")
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/test/life-quick.lua "${_data}")
-add_lua_test ( ${CMAKE_CURRENT_BINARY_DIR}/test/life-quick.lua )
-#add_lua_test ( test/luac.lua ) # Requires input
-add_lua_test ( test/printf.lua )
-add_lua_test ( test/readonly.lua )
-#set_property ( TEST readonly PROPERTY PASS_REGULAR_EXPRESSION "cannot redefine global variable `y'" )
-add_lua_test ( test/sieve.lua )
-add_lua_test ( test/sort.lua )
-#add_lua_test ( test/table.lua ) # Requires input
-add_lua_test ( test/trace-calls.lua )
-add_lua_test ( test/trace-globals.lua )
-#add_lua_test ( test/xd.lua ) # Requires input
+SET_TARGET_PROPERTIES(  liblua PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES(  liblua PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES(  liblua PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_BINARY_DIR}/bin${LIB_SUFFIX} )
+
+
+# Create static library, this is needed to compile luac in the 5.1.x, 5.2 Lua series
+
+ADD_LIBRARY ( liblua_static STATIC ${SRC_LIB} )
+TARGET_LINK_LIBRARIES ( liblua_static ${LIBS} )
+
+SET_TARGET_PROPERTIES ( liblua_static PROPERTIES OUTPUT_NAME lua${LIB_LUA_VER}_static CLEAN_DIRECT_OUTPUT 1 )
+
+SET_TARGET_PROPERTIES(  liblua_static PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_MINSIZEREL ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES(  liblua_static PROPERTIES LIBRARY_OUTPUT_DIRECTORY_MINSIZEREL ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+
+SET_TARGET_PROPERTIES(  liblua_static PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES(  liblua_static PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+
+SET_TARGET_PROPERTIES(  liblua_static PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_RELWITHDEBINFO ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES(  liblua_static PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELWITHDEBINFO ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+
+SET_TARGET_PROPERTIES(  liblua_static PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES(  liblua_static PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${PROJECT_BINARY_DIR}/lib${LIB_SUFFIX} )
+
+ADD_EXECUTABLE ( lua ${SRC_LUA} ${LUA_RC})
+TARGET_LINK_LIBRARIES ( lua liblua )
+
+SET_TARGET_PROPERTIES ( lua PROPERTIES DEBUG_POSTFIX d)
+
+SET_TARGET_PROPERTIES ( lua PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG          ${PROJECT_BINARY_DIR}/bin${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES ( lua PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${PROJECT_BINARY_DIR}/bin${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES ( lua PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE        ${PROJECT_BINARY_DIR}/bin${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES ( lua PROPERTIES RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL     ${PROJECT_BINARY_DIR}/bin${LIB_SUFFIX} )
+
+
+ADD_EXECUTABLE ( luac ${SRC_LUAC} ${LUAC_RC} )
+TARGET_LINK_LIBRARIES ( luac liblua_static )
+
+SET_TARGET_PROPERTIES ( luac PROPERTIES DEBUG_POSTFIX d)
+
+SET_TARGET_PROPERTIES ( luac PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG          ${PROJECT_BINARY_DIR}/bin${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES ( luac PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${PROJECT_BINARY_DIR}/bin${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES ( luac PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE        ${PROJECT_BINARY_DIR}/bin${LIB_SUFFIX} )
+SET_TARGET_PROPERTIES ( luac PROPERTIES RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL     ${PROJECT_BINARY_DIR}/bin${LIB_SUFFIX} )
+
+## TODO: TESTS
