@@ -24,6 +24,18 @@ SET(EXECUTABLE_OUTPUT_PATH         "${CMAKE_BINARY_DIR}/bin${LIB_SUFFIX}")
 
 SET (LIB_LUA_VER "51" CACHE STRING "Suffix of version (for library name) e.g lua51")
 
+#
+# Include dir COPY
+# If the source dir and the binary dir are not equals,
+# copy the content of libzond/cinlude to $/include
+# 
+IF(NOT ${PROJECT_SOURCE_DIR} EQUAL ${PROJECT_BINARY_DIR})
+	SET(TEMP_INCLUDE_ZOND_DIR_FROM "${PROJECT_SOURCE_DIR}/src/*.h")
+	SET(TEMP_INCLUDE_ZOND_DIR_TO   "${PROJECT_BINARY_DIR}/include")
+	MESSAGE(STATUS "Copying include dirs from  ${TEMP_INCLUDE_ZOND_DIR_FROM} to ${TEMP_INCLUDE_ZOND_DIR_TO}")
+	FILE ( COPY ${TEMP_INCLUDE_ZOND_DIR_FROM} DESTINATION ${TEMP_INCLUDE_ZOND_DIR_TO})
+ENDIF()
+
 
 IF ( WIN32 AND NOT CYGWIN )
   # Windows systems
