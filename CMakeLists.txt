@@ -7,7 +7,7 @@
 # Changed by Vinicius Jarina (viniciusjarina@gmail.com)
 
 PROJECT ( lua CXX )
-CMAKE_MINIMUM_REQUIRED ( VERSION 2.6 )
+CMAKE_MINIMUM_REQUIRED ( VERSION 2.8 )
 
 IF (CMAKE_SIZEOF_VOID_P EQUAL 8)
 	SET (LIB_SUFFIX "64" CACHE STRING "Suffix of the directory name, e.g. 64 for lib64")
@@ -17,12 +17,25 @@ ENDIF (CMAKE_SIZEOF_VOID_P EQUAL 8)
 
 
 SET(CMAKE_DEBUG_POSTFIX "d")
+SET(LIBRARY_OUTPUT_PATH            "${CMAKE_BINARY_DIR}/lib${LIB_SUFFIX}")
 SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib${LIB_SUFFIX}" CACHE STRING "Library build output directory")
 SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib${LIB_SUFFIX}")
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin${LIB_SUFFIX}")
 SET(EXECUTABLE_OUTPUT_PATH         "${CMAKE_BINARY_DIR}/bin${LIB_SUFFIX}")
 
 SET (LIB_LUA_VER "51" CACHE STRING "Suffix of version (for library name) e.g lua51")
+
+#
+# Include dir COPY
+# If the source dir and the binary dir are not equals,
+# copy the content of libzond/cinlude to $/include
+# 
+IF(NOT ${PROJECT_SOURCE_DIR} STREQUAL ${PROJECT_BINARY_DIR})
+	SET(TEMP_INCLUDE_ZOND_DIR_FROM "${PROJECT_SOURCE_DIR}/include")
+	SET(TEMP_INCLUDE_ZOND_DIR_TO   "${PROJECT_BINARY_DIR}")
+	MESSAGE(STATUS "Copying include dirs from  ${TEMP_INCLUDE_ZOND_DIR_FROM} to ${TEMP_INCLUDE_ZOND_DIR_TO}")
+	FILE ( COPY ${TEMP_INCLUDE_ZOND_DIR_FROM} DESTINATION ${TEMP_INCLUDE_ZOND_DIR_TO})
+ENDIF()
 
 
 IF ( WIN32 AND NOT CYGWIN )
@@ -58,7 +71,8 @@ ENDIF ()
 
 
 # Sources and headers
-INCLUDE_DIRECTORIES ( src ${CMAKE_CURRENT_BINARY_DIR} )
+INCLUDE_DIRECTORIES ( include )
+
 SET (   SRC_LIB 
 		src/lapi.cpp
 		src/lauxlib.cpp

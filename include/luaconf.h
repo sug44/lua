@@ -39,6 +39,11 @@
 #define LUA_USE_READLINE	/* needs some extra libraries */
 #endif
 
+#if defined(__SYMBIAN32__)
+#define LUA_USE_POSIX
+#define LUA_USE_DLOPEN		/* needs an extra library: -ldl */
+#endif
+
 #if defined(LUA_USE_MACOSX)
 #define LUA_USE_POSIX
 #define LUA_DL_DYLD		/* does not need extra library */
