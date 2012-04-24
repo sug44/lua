@@ -1,0 +1,36 @@
+#
+# lua Travis-CI Hook
+#
+
+# Since CMake is not directly supported we use erlang VMs
+language: erlang
+
+# We need CMake and LuaDist
+install:
+  - export MODULE=`basename $PWD`
+  - sudo apt-get install cmake >/dev/null 2>&1
+  - cd $HOME
+
+script:
+  - mkdir _build
+  - cd _build
+  - cmake ..
+  - cmake --build . -config Release
+  - ctest
+
+# Execute additional tests or commands
+#after_script:
+#  - [run additional test commans]
+
+# Only watch the master branch
+branches:
+  only:
+    - master
+
+# Notify if needed
+notifications:
+  recipients:
+    - viniciusjarina@gmail.com
+  email:
+    on_success: change
+    on_failure: always
