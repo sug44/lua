@@ -14,7 +14,7 @@ script:
   - cd _build
   - cmake ..
   - cmake --build . --config Release
-  - ctest
+  - ctest -C Release
 
 # Execute additional tests or commands
 #after_script:
