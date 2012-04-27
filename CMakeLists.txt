@@ -27,13 +27,13 @@ SET (LIB_LUA_VER "51" CACHE STRING "Suffix of version (for library name) e.g lua
 #
 # Include dir COPY
 # If the source dir and the binary dir are not equals,
-# copy the content of libzond/cinlude to $/include
+# copy the content of lua/inlude to $/include
 # 
 IF(NOT ${PROJECT_SOURCE_DIR} STREQUAL ${PROJECT_BINARY_DIR})
-	SET(TEMP_INCLUDE_ZOND_DIR_FROM "${PROJECT_SOURCE_DIR}/include")
-	SET(TEMP_INCLUDE_ZOND_DIR_TO   "${PROJECT_BINARY_DIR}")
-	MESSAGE(STATUS "Copying include dirs from  ${TEMP_INCLUDE_ZOND_DIR_FROM} to ${TEMP_INCLUDE_ZOND_DIR_TO}")
-	FILE ( COPY ${TEMP_INCLUDE_ZOND_DIR_FROM} DESTINATION ${TEMP_INCLUDE_ZOND_DIR_TO})
+	SET(TEMP_INCLUDE_LUA_DIR_FROM "${PROJECT_SOURCE_DIR}/include")
+	SET(TEMP_INCLUDE_LUA_DIR_TO   "${PROJECT_BINARY_DIR}")
+	MESSAGE(STATUS "Copying include dirs from  ${TEMP_INCLUDE_LUA_DIR_FROM} to ${TEMP_INCLUDE_LUA_DIR_TO}")
+	FILE ( COPY ${TEMP_INCLUDE_LUA_DIR_FROM} DESTINATION ${TEMP_INCLUDE_LUA_DIR_TO})
 ENDIF()
 
 
@@ -177,21 +177,56 @@ SET_TARGET_PROPERTIES ( luac PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO 
 SET_TARGET_PROPERTIES ( luac PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE        ${PROJECT_BINARY_DIR}/bin${LIB_SUFFIX} )
 SET_TARGET_PROPERTIES ( luac PROPERTIES RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL     ${PROJECT_BINARY_DIR}/bin${LIB_SUFFIX} )
 
-
-## TODO: TESTS
-
 ENABLE_TESTING()
 	
-ADD_TEST(bisect lua ${PROJECT_SOURCE_DIR}/test/bisect.lua)
-ADD_TEST(cf lua ${PROJECT_SOURCE_DIR}/test/cf.lua)
-ADD_TEST(echo lua ${PROJECT_SOURCE_DIR}/test/echo.lua)
-ADD_TEST(env lua ${PROJECT_SOURCE_DIR}/test/env.lua)
-ADD_TEST(factorial lua ${PROJECT_SOURCE_DIR}/test/factorial.lua)
-ADD_TEST(fib lua ${PROJECT_SOURCE_DIR}/test/fib.lua)
-ADD_TEST(fibfor lua ${PROJECT_SOURCE_DIR}/test/fibfor.lua)
-ADD_TEST(hello lua ${PROJECT_SOURCE_DIR}/test/hello.lua)
-ADD_TEST(printf lua ${PROJECT_SOURCE_DIR}/test/printf.lua)
-ADD_TEST(sieve lua ${PROJECT_SOURCE_DIR}/test/sieve.lua)
-ADD_TEST(sort lua ${PROJECT_SOURCE_DIR}/test/sort.lua)
-ADD_TEST(trace-calls  lua ${PROJECT_SOURCE_DIR}/test/trace-calls.lua)
-ADD_TEST(trace-globals lua ${PROJECT_SOURCE_DIR}/test/trace-globals.lua)
+ADD_TEST(NAME bisect  
+		 WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
+		 COMMAND lua ${PROJECT_SOURCE_DIR}/testbisect.lua)
+
+ADD_TEST(NAME cf
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
+		COMMAND lua ${PROJECT_SOURCE_DIR}/test/cf.lua)
+
+ADD_TEST(NAME echo
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
+		COMMAND lua ${PROJECT_SOURCE_DIR}/test/echo.lua)
+
+ADD_TEST(NAME env
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
+		COMMAND lua ${PROJECT_SOURCE_DIR}/test/env.lua)
+
+ADD_TEST(NAME factorial 
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
+		COMMAND lua ${PROJECT_SOURCE_DIR}/test/factorial.lua)
+
+ADD_TEST(NAME fib 
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
+		COMMAND lua ${PROJECT_SOURCE_DIR}/test/fib.lua)
+		
+ADD_TEST(NAME fibfor 
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
+		COMMAND lua ${PROJECT_SOURCE_DIR}/test/fibfor.lua)
+		
+ADD_TEST(NAME hello 
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
+		COMMAND lua ${PROJECT_SOURCE_DIR}/test/hello.lua)
+		
+ADD_TEST(NAME printf 
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
+		COMMAND lua ${PROJECT_SOURCE_DIR}/test/printf.lua)
+		
+ADD_TEST(NAME sieve 
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
+		COMMAND lua ${PROJECT_SOURCE_DIR}/test/sieve.lua)
+		
+ADD_TEST(NAME sort 
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
+		COMMAND lua ${PROJECT_SOURCE_DIR}/test/sort.lua)
+		
+ADD_TEST(NAME trace-calls 
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
+		COMMAND lua ${PROJECT_SOURCE_DIR}/test/trace-calls.lua)
+		
+ADD_TEST(NAME trace-globals 
+		WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/test
+		COMMAND lua ${PROJECT_SOURCE_DIR}/test/trace-globals.lua)
