@@ -1,7 +1,7 @@
 README for Lua 5.1
 ------------------
 
-[![Build Status](https://secure.travis-ci.org/viniciusjarina/lua.png?branch=master)](http://travis-ci.org/viniciusjarina/lua)
+[![Build Status](https://secure.travis-ci.org/viniciusjarina/lua.png?branch=lua-5.1)](http://travis-ci.org/viniciusjarina/lua)
 
 See INSTALL for installation instructions.
 See HISTORY for a summary of changes since the last released version.
