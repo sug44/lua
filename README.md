@@ -1,5 +1,5 @@
 
-This is Lua 5.2, released on 12 Dec 2011.
+This is Lua 5.2.1, released on 23 May 2012.
 -----------------------------------------
 
 [![Build Status](https://secure.travis-ci.org/viniciusjarina/lua.png?branch=master)](http://travis-ci.org/viniciusjarina/lua)
