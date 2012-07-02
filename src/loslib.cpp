@@ -118,7 +118,6 @@ static int os_getenv (lua_State *L) {
   return 1;
 }
 
-/* [viniciusjarina@gmail.com] hacking to compile under symbian */
 #ifndef CLOCKS_PER_SEC
 #define CLOCKS_PER_SEC 128
 #endif
