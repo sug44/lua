@@ -2,8 +2,8 @@
 # lua Travis-CI Hook
 #
 
-# Since CMake is not directly supported we use erlang VMs
-language: erlang
+# Travis language C++
+language: cpp
 
 # We need CMake and LuaDist
 install:
@@ -28,7 +28,7 @@ branches:
 # Notify if needed
 notifications:
   recipients:
-    - viniciusjarina@gmail.com
+    - codefoco@gmail.com
   email:
     on_success: change
     on_failure: always
