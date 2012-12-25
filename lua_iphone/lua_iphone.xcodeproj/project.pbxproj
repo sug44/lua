@@ -34,12 +34,9 @@
 		7147A4AC1688A87000693BAF /* ltable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4881688A87000693BAF /* ltable.cpp */; };
 		7147A4AD1688A87000693BAF /* ltablib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4891688A87000693BAF /* ltablib.cpp */; };
 		7147A4AE1688A87000693BAF /* ltm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A48A1688A87000693BAF /* ltm.cpp */; };
-		7147A4AF1688A87000693BAF /* lua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A48B1688A87000693BAF /* lua.cpp */; };
-		7147A4B01688A87000693BAF /* luac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A48E1688A87000693BAF /* luac.cpp */; };
 		7147A4B11688A87000693BAF /* lundump.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4901688A87000693BAF /* lundump.cpp */; };
 		7147A4B21688A87000693BAF /* lvm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4911688A87000693BAF /* lvm.cpp */; };
 		7147A4B31688A87000693BAF /* lzio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4921688A87000693BAF /* lzio.cpp */; };
-		7147A4B41688A87000693BAF /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4931688A87000693BAF /* Makefile */; };
 		7147A4B51688A87000693BAF /* print.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4941688A87000693BAF /* print.cpp */; };
 /* End PBXBuildFile section */
 
@@ -85,15 +82,9 @@
 		7147A4881688A87000693BAF /* ltable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ltable.cpp; sourceTree = "<group>"; };
 		7147A4891688A87000693BAF /* ltablib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ltablib.cpp; sourceTree = "<group>"; };
 		7147A48A1688A87000693BAF /* ltm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ltm.cpp; sourceTree = "<group>"; };
-		7147A48B1688A87000693BAF /* lua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua.cpp; sourceTree = "<group>"; };
-		7147A48C1688A87000693BAF /* lua.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lua.rc; sourceTree = "<group>"; };
-		7147A48D1688A87000693BAF /* lua_dll.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lua_dll.rc; sourceTree = "<group>"; };
-		7147A48E1688A87000693BAF /* luac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = luac.cpp; sourceTree = "<group>"; };
-		7147A48F1688A87000693BAF /* luac.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = luac.rc; sourceTree = "<group>"; };
 		7147A4901688A87000693BAF /* lundump.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lundump.cpp; sourceTree = "<group>"; };
 		7147A4911688A87000693BAF /* lvm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lvm.cpp; sourceTree = "<group>"; };
 		7147A4921688A87000693BAF /* lzio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lzio.cpp; sourceTree = "<group>"; };
-		7147A4931688A87000693BAF /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		7147A4941688A87000693BAF /* print.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = print.cpp; sourceTree = "<group>"; };
 		7147A4B71688A88E00693BAF /* lapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lapi.h; sourceTree = "<group>"; };
 		7147A4B81688A88E00693BAF /* lauxlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lauxlib.h; sourceTree = "<group>"; };
@@ -204,15 +195,9 @@
 				7147A4881688A87000693BAF /* ltable.cpp */,
 				7147A4891688A87000693BAF /* ltablib.cpp */,
 				7147A48A1688A87000693BAF /* ltm.cpp */,
-				7147A48B1688A87000693BAF /* lua.cpp */,
-				7147A48C1688A87000693BAF /* lua.rc */,
-				7147A48D1688A87000693BAF /* lua_dll.rc */,
-				7147A48E1688A87000693BAF /* luac.cpp */,
-				7147A48F1688A87000693BAF /* luac.rc */,
 				7147A4901688A87000693BAF /* lundump.cpp */,
 				7147A4911688A87000693BAF /* lvm.cpp */,
 				7147A4921688A87000693BAF /* lzio.cpp */,
-				7147A4931688A87000693BAF /* Makefile */,
 				7147A4941688A87000693BAF /* print.cpp */,
 			);
 			name = src;
@@ -327,12 +312,9 @@
 				7147A4AC1688A87000693BAF /* ltable.cpp in Sources */,
 				7147A4AD1688A87000693BAF /* ltablib.cpp in Sources */,
 				7147A4AE1688A87000693BAF /* ltm.cpp in Sources */,
-				7147A4AF1688A87000693BAF /* lua.cpp in Sources */,
-				7147A4B01688A87000693BAF /* luac.cpp in Sources */,
 				7147A4B11688A87000693BAF /* lundump.cpp in Sources */,
 				7147A4B21688A87000693BAF /* lvm.cpp in Sources */,
 				7147A4B31688A87000693BAF /* lzio.cpp in Sources */,
-				7147A4B41688A87000693BAF /* Makefile in Sources */,
 				7147A4B51688A87000693BAF /* print.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,6 +410,7 @@
 				7147A46F1688A84300693BAF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

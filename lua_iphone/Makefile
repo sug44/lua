@@ -6,7 +6,7 @@ TARGET=Lua_iPhone
 all: libLua51.a
 
 Lua_iPhone:
-	echo "Building Lua51 for iOS"
+	echo "Building Lua 5.1.5 for iOS"
 
 libLua51-i386.a: Lua_iPhone
 	$(XBUILD) -project $(PROJECT) -target $(TARGET) -sdk iphonesimulator -configuration Release clean build
