@@ -19,6 +19,32 @@
 #include "lauxlib.h"
 #include "lualib.h"
 
+#ifdef LUA_IPHONE
+    #include <asl.h>
+    
+    void _format_print (const char *format, ...)
+    {
+        va_list args;
+    
+        va_start (args, format);
+    
+        asl_vlog (NULL, NULL, ASL_LEVEL_WARNING, format, args);
+    
+        va_end (args);
+    }
+
+    inline int lua_fputs (const char * message, FILE * unused)
+    {
+        _format_print ("%s", message);
+        return 1;
+    }
+#else
+    inline int lua_fputs (const char * message, FILE * file)
+    {
+        return fputs (message, file);
+    }
+#endif
+
 
 
 
@@ -41,11 +67,11 @@ static int luaB_print (lua_State *L) {
     if (s == NULL)
       return luaL_error(L, LUA_QL("tostring") " must return a string to "
                            LUA_QL("print"));
-    if (i>1) fputs("\t", stdout);
-    fputs(s, stdout);
+    if (i>1) lua_fputs("\t", stdout);
+    lua_fputs(s, stdout);
     lua_pop(L, 1);  /* pop result */
   }
-  fputs("\n", stdout);
+  lua_fputs("\n", stdout);
   return 0;
 }
 

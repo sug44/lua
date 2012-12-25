@@ -373,6 +373,11 @@
 				DSTROOT = /tmp/Lua_iPhone.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lua_iPhone/Lua_iPhone-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = LUA_IPHONE;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -385,6 +390,8 @@
 				DSTROOT = /tmp/Lua_iPhone.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lua_iPhone/Lua_iPhone-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = LUA_IPHONE;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = LUA_IPHONE;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

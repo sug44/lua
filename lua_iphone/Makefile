@@ -24,4 +24,4 @@ libLua51.a: libLua51-i386.a libLua51-armv7.a libLua51-armv7s.a
 	lipo -create -output $@ $^
 
 clean:
-	-rm -f *.a *dll
+	-rm -f *.a
