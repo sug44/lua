@@ -38,6 +38,7 @@
 		7147A4B21688A87000693BAF /* lvm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4911688A87000693BAF /* lvm.cpp */; };
 		7147A4B31688A87000693BAF /* lzio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4921688A87000693BAF /* lzio.cpp */; };
 		7147A4B51688A87000693BAF /* print.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4941688A87000693BAF /* print.cpp */; };
+		7199480216A670C400352145 /* lnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7199480116A670C400352145 /* lnet.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -109,6 +110,8 @@
 		7147A4CB1688A88E00693BAF /* lundump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lundump.h; sourceTree = "<group>"; };
 		7147A4CC1688A88E00693BAF /* lvm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lvm.h; sourceTree = "<group>"; };
 		7147A4CD1688A88E00693BAF /* lzio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lzio.h; sourceTree = "<group>"; };
+		719947FF16A670B900352145 /* lnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lnet.h; sourceTree = "<group>"; };
+		7199480116A670C400352145 /* lnet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lnet.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +172,7 @@
 		7147A4701688A87000693BAF /* src */ = {
 			isa = PBXGroup;
 			children = (
+				7199480116A670C400352145 /* lnet.cpp */,
 				7147A4711688A87000693BAF /* lapi.cpp */,
 				7147A4721688A87000693BAF /* lauxlib.cpp */,
 				7147A4731688A87000693BAF /* lbaselib.cpp */,
@@ -207,6 +211,7 @@
 		7147A4B61688A88E00693BAF /* include */ = {
 			isa = PBXGroup;
 			children = (
+				719947FF16A670B900352145 /* lnet.h */,
 				7147A4B71688A88E00693BAF /* lapi.h */,
 				7147A4B81688A88E00693BAF /* lauxlib.h */,
 				7147A4B91688A88E00693BAF /* lcode.h */,
@@ -316,6 +321,7 @@
 				7147A4B21688A87000693BAF /* lvm.cpp in Sources */,
 				7147A4B31688A87000693BAF /* lzio.cpp in Sources */,
 				7147A4B51688A87000693BAF /* print.cpp in Sources */,
+				7199480216A670C400352145 /* lnet.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
