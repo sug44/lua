@@ -21,7 +21,7 @@ static int stdcall_closure (lua_State *L)
 
 LUA_API void lua_pushstdcallcfunction (lua_State *L,lua_stdcallCFunction function) 
 {
-	lua_pushlightuserdata (L, function);
+	lua_pushlightuserdata (L, (void *) function);
 	lua_pushcclosure (L, stdcall_closure, 1);
 }
 
