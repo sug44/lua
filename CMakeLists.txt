@@ -103,6 +103,7 @@ SET (   SRC_LIB
         src/lvm.cpp
 	    src/lzio.cpp
 		src/print.cpp
+		src/lnet.cpp
 )
 
 SET ( SRC_LUA  src/lua.cpp )
