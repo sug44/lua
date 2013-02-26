@@ -618,6 +618,7 @@ static void add_value (MatchState *ms, luaL_Buffer *b, const char *s,
       add_s(ms, b, s, e);
       return;
     }
+    case LUA_TUSERDATA:
     case LUA_TFUNCTION: {
       int n;
       lua_pushvalue(L, 3);
