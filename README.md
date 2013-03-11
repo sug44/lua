@@ -1,7 +1,7 @@
 README for Lua 5.1
 ------------------
 
-[![Build Status](https://secure.travis-ci.org/codefoco/lua.png?branch=lua-5.1)](https://travis-ci.org/codefoco/lua)
+[![Build Status](https://secure.travis-ci.org/NLua/lua.png?branch=lua-5.1)](https://travis-ci.org/NLua/lua)
 
 See INSTALL for installation instructions.
 See HISTORY for a summary of changes since the last released version.
