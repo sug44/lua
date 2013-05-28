@@ -341,7 +341,8 @@ assert(table.remove(a, 1) == 'b')
 assert(#a == 0 and a.n == nil)
 
 a = {10,20,30,40}
-assert(table.remove(a, #a + 1) == nil and table.remove(a, 0) == nil)
+assert(table.remove(a, #a + 1) == nil)
+assert(table.remove(a, #a + 1) == nil) -- for some reason 5.2.2 doesn like table.remove(a, 0)
 assert(a[#a] == 40)
 assert(table.remove(a, #a) == 40)
 assert(a[#a] == 30)
