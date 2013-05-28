@@ -743,7 +743,7 @@ static int str_gsub (lua_State *L) {
   MatchState ms;
   luaL_Buffer b;
   luaL_argcheck(L, tr == LUA_TNUMBER || tr == LUA_TSTRING ||
-                   tr == LUA_TFUNCTION || tr == LUA_TTABLE, 3,
+                   tr == LUA_TFUNCTION || tr == LUA_TTABLE || tr == LUA_TUSERDATA, 3,
                       "string/function/table expected");
   luaL_buffinit(L, &b);
   if (anchor) {

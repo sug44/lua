@@ -101,16 +101,49 @@ static int os_rename (lua_State *L) {
   return luaL_fileresult(L, rename(fromname, toname) == 0, NULL);
 }
 
+#if defined(LUA_WIN)
+
+#include <windows.h>
+
+static int win_tmpnam (char * buff)
+{
+	char tempdir [MAX_PATH];
+
+	if (!GetTempPath (sizeof(tempdir), tempdir))
+		return 1;
+
+	if(!GetTempFileName(tempdir, "lua", 0, buff))
+		return 1;
+	if (DeleteFile (buff) == 0)
+		return 1;
+
+	return 0;
+}
 
 static int os_tmpname (lua_State *L) {
-  char buff[LUA_TMPNAMBUFSIZE];
+
+  char buff[MAX_PATH];
+
   int err;
-  lua_tmpnam(buff, err);
+  err = win_tmpnam (buff);
   if (err)
     return luaL_error(L, "unable to generate a unique filename");
   lua_pushstring(L, buff);
   return 1;
 }
+
+#else
+
+static int os_tmpname (lua_State *L) {
+	char buff[LUA_TMPNAMBUFSIZE];
+	int err;
+	lua_tmpnam(buff, err);
+	if (err)
+		return luaL_error(L, "unable to generate a unique filename");
+	lua_pushstring(L, buff);
+	return 1;
+}
+#endif
 
 
 static int os_getenv (lua_State *L) {

@@ -19,7 +19,31 @@
 #include "lauxlib.h"
 #include "lualib.h"
 
+#ifdef LUA_IPHONE
+    #include <asl.h>
+    
+    void _format_print (const char *format, ...)
+    {
+        va_list args;
+    
+        va_start (args, format);
+    
+        asl_vlog (NULL, NULL, ASL_LEVEL_WARNING, format, args);
+    
+        va_end (args);
+    }
 
+    inline int lua_fputs (const char * message, FILE * unused)
+    {
+        _format_print ("%s", message);
+        return 1;
+    }
+#else
+    inline int lua_fputs (const char * message, FILE * file)
+    {
+        return fputs (message, file);
+    }
+#endif
 static int luaB_print (lua_State *L) {
   int n = lua_gettop(L);  /* number of arguments */
   int i;
