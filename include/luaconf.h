@@ -411,6 +411,12 @@
 
 
 /*
+@@ l_mathop allows the addition of an 'l' or 'f' to all math operations
+*/
+#define l_mathop(x)		(x)
+
+
+/*
 @@ lua_str2number converts a decimal numeric string to a number.
 @@ lua_strx2number converts an hexadecimal numeric string to a number.
 ** In C99, 'strtod' do both conversions. C89, however, has no function
@@ -432,8 +438,8 @@
 /* the following operations need the math library */
 #if defined(lobject_c) || defined(lvm_c)
 #include <math.h>
-#define luai_nummod(L,a,b)	((a) - floor((a)/(b))*(b))
-#define luai_numpow(L,a,b)	(pow(a,b))
+#define luai_nummod(L,a,b)	((a) - l_mathop(floor)((a)/(b))*(b))
+#define luai_numpow(L,a,b)	(l_mathop(pow)(a,b))
 #endif
 
 /* these are quite standard operations */
@@ -470,13 +476,12 @@
 ** Some tricks with doubles
 */
 
-#if defined(LUA_CORE) && \
-    defined(LUA_NUMBER_DOUBLE) && !defined(LUA_ANSI)	/* { */
+#if defined(LUA_NUMBER_DOUBLE) && !defined(LUA_ANSI)	/* { */
 /*
 ** The next definitions activate some tricks to speed up the
 ** conversion from doubles to integer types, mainly to LUA_UNSIGNED.
 **
-@@ MS_ASMTRICK uses Microsoft assembler to avoid clashes with a
+@@ LUA_MSASMTRICK uses Microsoft assembler to avoid clashes with a
 ** DirectX idiosyncrasy.
 **
 @@ LUA_IEEE754TRICK uses a trick that should work on any machine
@@ -500,7 +505,7 @@
 /* Microsoft compiler on a Pentium (32 bit) ? */
 #if defined(LUA_WIN) && defined(_MSC_VER) && defined(_M_IX86)	/* { */
 
-#define MS_ASMTRICK
+#define LUA_MSASMTRICK
 #define LUA_IEEEENDIAN		0
 #define LUA_NANTRICK
 
