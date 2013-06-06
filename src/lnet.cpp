@@ -137,7 +137,7 @@ LUA_API void luanet_setglobal (lua_State *L, const char * name) {
 }
 
 LUA_API void luanet_getglobal (lua_State *L, const char * name) {
-	lua_setglobal (L, name);
+	lua_getglobal (L, name);
 }
 
 
