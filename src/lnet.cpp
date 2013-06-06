@@ -123,3 +123,21 @@ LUA_API int luanet_rawnetobj (lua_State *L,int index) {
 		return *udata;
 	return -1;
 }
+
+LUA_API void luanet_pushglobaltable (lua_State *L) {
+	lua_pushvalue(L, LUA_GLOBALSINDEX);
+}
+
+LUA_API void luanet_popglobaltable (lua_State *L) {
+	lua_replace(L, LUA_GLOBALSINDEX);
+}
+
+LUA_API void luanet_setglobal (lua_State *L, const char * name) {
+	lua_setglobal (L, name);
+}
+
+LUA_API void luanet_getglobal (lua_State *L, const char * name) {
+	lua_setglobal (L, name);
+}
+
+
