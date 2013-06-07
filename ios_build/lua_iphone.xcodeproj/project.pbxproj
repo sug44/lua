@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1887CD9917555211009C90A5 /* lbitlib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887CD9617555211009C90A5 /* lbitlib.cpp */; };
+		1887CD9A17555211009C90A5 /* lcorolib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887CD9717555211009C90A5 /* lcorolib.cpp */; };
+		1887CD9B17555211009C90A5 /* lctype.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887CD9817555211009C90A5 /* lctype.cpp */; };
 		7147A4631688A84300693BAF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7147A4621688A84300693BAF /* Foundation.framework */; };
 		7147A4951688A87000693BAF /* lapi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4711688A87000693BAF /* lapi.cpp */; };
 		7147A4961688A87000693BAF /* lauxlib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4721688A87000693BAF /* lauxlib.cpp */; };
@@ -37,7 +40,6 @@
 		7147A4B11688A87000693BAF /* lundump.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4901688A87000693BAF /* lundump.cpp */; };
 		7147A4B21688A87000693BAF /* lvm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4911688A87000693BAF /* lvm.cpp */; };
 		7147A4B31688A87000693BAF /* lzio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4921688A87000693BAF /* lzio.cpp */; };
-		7147A4B51688A87000693BAF /* print.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7147A4941688A87000693BAF /* print.cpp */; };
 		7199480216A670C400352145 /* lnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7199480116A670C400352145 /* lnet.cpp */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1887CD95175551FA009C90A5 /* lctype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lctype.h; sourceTree = "<group>"; };
+		1887CD9617555211009C90A5 /* lbitlib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lbitlib.cpp; sourceTree = "<group>"; };
+		1887CD9717555211009C90A5 /* lcorolib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lcorolib.cpp; sourceTree = "<group>"; };
+		1887CD9817555211009C90A5 /* lctype.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lctype.cpp; sourceTree = "<group>"; };
 		7147A45F1688A84300693BAF /* libLua_iPhone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLua_iPhone.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7147A4621688A84300693BAF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7147A4661688A84300693BAF /* Lua_iPhone-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lua_iPhone-Prefix.pch"; sourceTree = "<group>"; };
@@ -86,7 +92,6 @@
 		7147A4901688A87000693BAF /* lundump.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lundump.cpp; sourceTree = "<group>"; };
 		7147A4911688A87000693BAF /* lvm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lvm.cpp; sourceTree = "<group>"; };
 		7147A4921688A87000693BAF /* lzio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lzio.cpp; sourceTree = "<group>"; };
-		7147A4941688A87000693BAF /* print.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = print.cpp; sourceTree = "<group>"; };
 		7147A4B71688A88E00693BAF /* lapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lapi.h; sourceTree = "<group>"; };
 		7147A4B81688A88E00693BAF /* lauxlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lauxlib.h; sourceTree = "<group>"; };
 		7147A4B91688A88E00693BAF /* lcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lcode.h; sourceTree = "<group>"; };
@@ -172,6 +177,9 @@
 		7147A4701688A87000693BAF /* src */ = {
 			isa = PBXGroup;
 			children = (
+				1887CD9617555211009C90A5 /* lbitlib.cpp */,
+				1887CD9717555211009C90A5 /* lcorolib.cpp */,
+				1887CD9817555211009C90A5 /* lctype.cpp */,
 				7199480116A670C400352145 /* lnet.cpp */,
 				7147A4711688A87000693BAF /* lapi.cpp */,
 				7147A4721688A87000693BAF /* lauxlib.cpp */,
@@ -202,7 +210,6 @@
 				7147A4901688A87000693BAF /* lundump.cpp */,
 				7147A4911688A87000693BAF /* lvm.cpp */,
 				7147A4921688A87000693BAF /* lzio.cpp */,
-				7147A4941688A87000693BAF /* print.cpp */,
 			);
 			name = src;
 			path = ../../src;
@@ -211,6 +218,7 @@
 		7147A4B61688A88E00693BAF /* include */ = {
 			isa = PBXGroup;
 			children = (
+				1887CD95175551FA009C90A5 /* lctype.h */,
 				719947FF16A670B900352145 /* lnet.h */,
 				7147A4B71688A88E00693BAF /* lapi.h */,
 				7147A4B81688A88E00693BAF /* lauxlib.h */,
@@ -269,7 +277,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Code Foco";
 			};
-			buildConfigurationList = 7147A4591688A84300693BAF /* Build configuration list for PBXProject "Lua_iPhone" */;
+			buildConfigurationList = 7147A4591688A84300693BAF /* Build configuration list for PBXProject "lua_iphone" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -320,8 +328,10 @@
 				7147A4B11688A87000693BAF /* lundump.cpp in Sources */,
 				7147A4B21688A87000693BAF /* lvm.cpp in Sources */,
 				7147A4B31688A87000693BAF /* lzio.cpp in Sources */,
-				7147A4B51688A87000693BAF /* print.cpp in Sources */,
 				7199480216A670C400352145 /* lnet.cpp in Sources */,
+				1887CD9917555211009C90A5 /* lbitlib.cpp in Sources */,
+				1887CD9A17555211009C90A5 /* lcorolib.cpp in Sources */,
+				1887CD9B17555211009C90A5 /* lctype.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,7 +417,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7147A4591688A84300693BAF /* Build configuration list for PBXProject "Lua_iPhone" */ = {
+		7147A4591688A84300693BAF /* Build configuration list for PBXProject "lua_iphone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7147A46B1688A84300693BAF /* Debug */,

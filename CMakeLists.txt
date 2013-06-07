@@ -71,38 +71,39 @@ ENDIF ()
 # Sources and headers
 INCLUDE_DIRECTORIES ( include )
 SET (   SRC_LIB 
-		src/lapi.cpp 
-		src/lcode.cpp
-		src/lctype.cpp
-		src/ldebug.cpp 
-		src/ldo.cpp 
-		src/ldump.cpp 
-		src/lfunc.cpp 
-		src/lgc.cpp 
-		src/llex.cpp 
-		src/lmem.cpp 
-		src/lobject.cpp 
-		src/lopcodes.cpp 
-		src/lparser.cpp 
-		src/lstate.cpp 
-		src/lstring.cpp 
-		src/ltable.cpp 
-		src/ltm.cpp 
-		src/lundump.cpp 
-		src/lvm.cpp 
-		src/lzio.cpp 
-		src/lauxlib.cpp 
-		src/lbaselib.cpp 
-		src/ldblib.cpp 
-		src/liolib.cpp 
-		src/lmathlib.cpp 
-		src/loslib.cpp 
-		src/ltablib.cpp 
-		src/lstrlib.cpp 
-		src/linit.cpp 
+		src/lapi.cpp
+		src/lauxlib.cpp
+		src/lbaselib.cpp
 		src/lbitlib.cpp
+		src/lcode.cpp
 		src/lcorolib.cpp
+		src/lctype.cpp
+		src/ldblib.cpp
+		src/ldebug.cpp
+		src/ldo.cpp
+		src/ldump.cpp
+		src/lfunc.cpp
+		src/lgc.cpp
+		src/linit.cpp
+		src/liolib.cpp
+		src/llex.cpp
+		src/lmathlib.cpp
+		src/lmem.cpp
+		src/lnet.cpp
 		src/loadlib.cpp
+		src/lobject.cpp
+		src/lopcodes.cpp
+		src/loslib.cpp
+		src/lparser.cpp
+		src/lstate.cpp
+		src/lstring.cpp
+		src/lstrlib.cpp
+		src/ltable.cpp
+		src/ltablib.cpp
+		src/ltm.cpp
+		src/lundump.cpp
+		src/lvm.cpp
+		src/lzio.cpp
 		)
 		
 SET ( SRC_LUA  src/lua.cpp )
