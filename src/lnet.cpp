@@ -74,6 +74,10 @@ static void *checkudata(lua_State *L, int ud, const char *tname)
 	return NULL;
 }
 
+LUA_API int luanet_registryindex () 
+{
+	return LUA_REGISTRYINDEX;
+}
 
 LUA_API int luanet_tonetobject(lua_State *L,int index) 
 {
