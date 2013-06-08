@@ -4,6 +4,8 @@
 #include "lua.h"
 #include "lnet.h"
 
+#define lua_popglobaltable(L)  \
+	lua_rawseti(L, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS)
 
 /*
 ** stdcall C function support
@@ -129,11 +131,11 @@ LUA_API int luanet_rawnetobj (lua_State *L,int index) {
 }
 
 LUA_API void luanet_pushglobaltable (lua_State *L) {
-	lua_pushvalue(L, LUA_GLOBALSINDEX);
+	lua_pushglobaltable (L);
 }
 
 LUA_API void luanet_popglobaltable (lua_State *L) {
-	lua_replace(L, LUA_GLOBALSINDEX);
+	lua_popglobaltable (L);
 }
 
 LUA_API void luanet_setglobal (lua_State *L, const char * name) {
