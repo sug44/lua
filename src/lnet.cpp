@@ -2,6 +2,7 @@
 #define LUA_LIB
 
 #include "lua.h"
+#include "lauxlib.h"
 #include "lnet.h"
 
 
@@ -74,11 +75,6 @@ static void *checkudata(lua_State *L, int ud, const char *tname)
 	return NULL;
 }
 
-LUA_API int luanet_registryindex () 
-{
-	return LUA_REGISTRYINDEX;
-}
-
 LUA_API int luanet_tonetobject(lua_State *L,int index) 
 {
 	int *udata;
@@ -112,6 +108,14 @@ LUA_API void luanet_newudata (lua_State *L,int val)
 	*pointer=val;
 }
 
+LUA_API int luanet_rawnetobj (lua_State *L,int index) {
+	int *udata = (int *)lua_touserdata (L,index);
+
+	if(udata!=NULL) 
+		return *udata;
+	return -1;
+}
+
 LUA_API int luanet_checkudata (lua_State *L,int index,const char *meta) 
 {
 	int *udata = (int*)checkudata (L, index, meta);
@@ -120,12 +124,12 @@ LUA_API int luanet_checkudata (lua_State *L,int index,const char *meta)
 	return -1;
 }
 
-LUA_API int luanet_rawnetobj (lua_State *L,int index) {
-	int *udata = (int *)lua_touserdata (L,index);
 
-	if(udata!=NULL) 
-		return *udata;
-	return -1;
+/* Compatibility functions to allow NLua work with Lua 5.1.5 and Lua 5.2.2 with the same dll interface. */ 
+
+LUA_API int luanet_registryindex () 
+{
+	return LUA_REGISTRYINDEX;
 }
 
 LUA_API void luanet_pushglobaltable (lua_State *L) {
@@ -144,4 +148,27 @@ LUA_API void luanet_getglobal (lua_State *L, const char * name) {
 	lua_getglobal (L, name);
 }
 
+LUA_API int luanet_pcall (lua_State *L, int nargs, int nresults, int errfunc)
+{
+	return lua_pcall (L, nargs, nresults, errfunc);
+}
 
+LUA_API int luanet_loadbuffer (lua_State *L, const char *buff, size_t sz, const char *name)
+{
+	return luaL_loadbuffer (L, buff, sz, name);
+}
+
+LUA_API int luanet_loadfile (lua_State *L, const char *file)
+{
+	return luaL_loadfile (L, file);
+}
+
+LUA_API double luanet_tonumber (lua_State *L, int idx)
+{
+	return lua_tonumber (L, idx);
+}
+
+LUA_API int luanet_equal (lua_State *L, int idx1, int idx2)
+{
+	return lua_equal(L, idx1, idx2);
+}
