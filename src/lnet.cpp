@@ -172,3 +172,8 @@ LUA_API int luanet_equal (lua_State *L, int idx1, int idx2)
 {
 	return lua_compare(L,(idx1),(idx2),LUA_OPEQ);
 }
+
+LUA_API void luanet_pushlstring (lua_State *L, const char *s, size_t len)
+{
+	lua_pushlstring (L, s, len);
+}
