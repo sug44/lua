@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{abd36435-56ad-4940-b51a-10aeeca46c01}</ProjectGuid>
-    <RootNamespace>liblua</RootNamespace>
+    <RootNamespace>lua52</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <WinMDAssembly>true</WinMDAssembly>

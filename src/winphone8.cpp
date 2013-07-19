@@ -11,9 +11,10 @@ int GetTempFileName (const char * path, const char * prefix, int , const char * 
 	return 0;
 }
 
-DWORD GetModuleFileNameA(void *, char *, size_t)
+DWORD GetModuleFileNameA(void * handle, char * buffer, size_t buffsize)
 {
-	return 0;
+	strcpy(buffer, "\\lua.exe");
+	return strlen (buffer);
 }
 
 HMODULE LoadLibraryExA(const char * path, void * , unsigned int flags)
@@ -32,7 +33,7 @@ int system (const char * command)
 
 char * getenv (const char * env)
 {
-	return "";
+	return NULL;
 }
 
 FILE * _popen (const char * pipename, const char *)
