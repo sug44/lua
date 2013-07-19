@@ -35,6 +35,10 @@ LUA_API int luaL_checkmetatable(lua_State *L,int index);
 
 LUA_API int luanet_tonetobject(lua_State *L,int index);
 
+LUA_API double luanet_tonumber (lua_State *L, int idx);
+
+LUA_API void luanet_pushlstring (lua_State *L, const char *s, size_t len);
+
 LUA_API void luanet_newudata(lua_State *L,int val);
 
 LUA_API void *luanet_gettag(void);
@@ -56,6 +60,8 @@ LUA_API void luanet_getglobal (lua_State *L, const char * name);
 LUA_API int luanet_pcall (lua_State *L, int nargs, int nresults, int errfunc);
 
 LUA_API int luanet_loadbuffer (lua_State *L, const char *buff, size_t sz, const char *name);
+
+LUA_API int luanet_loadfile (lua_State *L, const char *file);
 
 LUA_API int luanet_equal (lua_State *L, int idx, int idx2);
 

@@ -44,6 +44,12 @@
 
 #endif
 
+#if defined(WP8)
+#include <windows.h>
+#include <winphone8.h>
+
+#endif
+
 /*
 ** {======================================================
 ** lua_popen spawns a new process connected to the current

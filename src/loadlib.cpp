@@ -14,6 +14,11 @@
 */
 #if defined(_WIN32)
 #include <windows.h>
+#if defined(WP8)
+
+#include <winphone8.h>
+
+#endif
 #endif
 
 
@@ -196,6 +201,7 @@ static void ll_unloadlib (void *lib) {
 
 
 static void *ll_load (lua_State *L, const char *path, int seeglb) {
+	    
   HMODULE lib = LoadLibraryExA(path, NULL, LUA_LLE_FLAGS);
   (void)(seeglb);  /* not used: symbols are 'global' by default */
   if (lib == NULL) pusherror(L);
