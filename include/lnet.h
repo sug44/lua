@@ -9,7 +9,7 @@
 ** stdcall C function
 */
 
-#ifdef WIN32
+#if defined(WIN32) || defined(WP8)
 	#define LUA_STDCALL __stdcall
 #else
 	#define LUA_STDCALL
