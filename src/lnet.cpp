@@ -5,6 +5,8 @@
 #include "lauxlib.h"
 #include "lnet.h"
 
+#include <string.h>
+
 #define lua_popglobaltable(L)  \
 	lua_rawseti(L, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS)
 
@@ -155,6 +157,8 @@ LUA_API int luanet_pcall (lua_State *L, int nargs, int nresults, int errfunc)
 
 LUA_API int luanet_loadbuffer (lua_State *L, const char *buff, size_t sz, const char *name)
 {
+    if (sz == 0)
+        sz = strlen (buff);
 	return luaL_loadbuffer (L, buff, sz, name);
 }
 
