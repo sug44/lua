@@ -1,5 +1,5 @@
 /*
-** $Id: loadlib.c,v 1.111 2012/05/30 12:33:44 roberto Exp $
+** $Id: loadlib.c,v 1.111.1.1 2013/04/12 18:48:47 roberto Exp $
 ** Dynamic library loader for Lua
 ** See Copyright Notice in lua.h
 **
@@ -176,7 +176,7 @@ static void setprogdir (lua_State *L) {
   DWORD nsize = sizeof(buff)/sizeof(char);
   DWORD n = GetModuleFileNameA(NULL, buff, nsize);
   if (n == 0 || n == nsize || (lb = strrchr(buff, '\\')) == NULL)
-       luaL_error(L, "unable to get ModuleFileName");
+    luaL_error(L, "unable to get ModuleFileName");
   else {
     *lb = '\0';
     luaL_gsub(L, lua_tostring(L, -1), LUA_EXEC_DIR, buff);
@@ -201,7 +201,6 @@ static void ll_unloadlib (void *lib) {
 
 
 static void *ll_load (lua_State *L, const char *path, int seeglb) {
-	    
   HMODULE lib = LoadLibraryExA(path, NULL, LUA_LLE_FLAGS);
   (void)(seeglb);  /* not used: symbols are 'global' by default */
   if (lib == NULL) pusherror(L);

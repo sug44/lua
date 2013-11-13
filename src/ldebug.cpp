@@ -1,5 +1,5 @@
 /*
-** $Id: ldebug.c,v 2.90 2012/08/16 17:34:28 roberto Exp $
+** $Id: ldebug.c,v 2.90.1.3 2013/05/16 16:04:15 roberto Exp $
 ** Debug Interface
 ** See Copyright Notice in lua.h
 */
@@ -326,11 +326,14 @@ static void kname (Proto *p, int pc, int c, const char **name) {
   *name = "?";  /* no reasonable name found */
 }
 
+
 static int filterpc (int pc, int jmptarget) {
   if (pc < jmptarget)  /* is code conditional (inside a jump)? */
     return -1;  /* cannot know who sets that register */
   else return pc;  /* current position sets that register */
 }
+
+
 /*
 ** try to find last instruction before 'lastpc' that modified register 'reg'
 */
@@ -351,13 +354,13 @@ static int findsetreg (Proto *p, int lastpc, int reg) {
       }
       case OP_TFORCALL: {
         if (reg >= a + 2)  /* affect all regs above its base */
-           setreg = filterpc(pc, jmptarget);        
+          setreg = filterpc(pc, jmptarget);
         break;
       }
       case OP_CALL:
       case OP_TAILCALL: {
         if (reg >= a)  /* affect all registers above base */
-           setreg = filterpc(pc, jmptarget);        
+          setreg = filterpc(pc, jmptarget);
         break;
       }
       case OP_JMP: {
@@ -371,8 +374,8 @@ static int findsetreg (Proto *p, int lastpc, int reg) {
         break;
       }
       case OP_TEST: {
-		if (reg == a)  /* jumped code can change 'a' */
-	    	setreg = filterpc(pc, jmptarget);
+        if (reg == a)  /* jumped code can change 'a' */
+          setreg = filterpc(pc, jmptarget);
         break;
       }
       default:
