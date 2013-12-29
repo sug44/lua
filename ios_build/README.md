@@ -5,7 +5,7 @@ Building Lua51 for iPhone
 	
 		make
 
-+ This will produce libLua51.a just add to your iOS project.
++ This will produce libLua52.a just add to your iOS project.
 + Remember to add stdlibc++ to build your application.
 
 
