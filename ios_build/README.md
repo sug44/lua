@@ -1,4 +1,4 @@
-Building Lua51 for iPhone
+Building Lua52 for iPhone
 =========================
 
 + You can build using Xcode, or to make the life easier just type on Lua_iPhone folder.
