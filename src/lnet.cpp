@@ -21,13 +21,11 @@
 
 static int tag = 0;
 
-
-static int stdcall_closure (lua_State *L) 
+static int stdcall_closure (lua_State *L1) 
 {
-	lua_stdcallCFunction function = (lua_stdcallCFunction)lua_touserdata (L, lua_upvalueindex (1));
-	return function (L);
+	lua_stdcallCFunction function = (lua_stdcallCFunction) lua_touserdata(L1, lua_upvalueindex(1));
+	return function (L1);
 }
-
 
 LUA_API void lua_pushstdcallcfunction (lua_State *L,lua_stdcallCFunction function) 
 {
@@ -185,6 +183,14 @@ LUA_API int luanet_equal (lua_State *L, int idx1, int idx2)
 LUA_API void luanet_pushlstring (lua_State *L, const char *s, size_t len)
 {
 	lua_pushlstring (L, s, len);
+}
+
+LUA_API lua_State* luanet_get_main_state(lua_State* L1)
+{
+	lua_rawgeti(L1, LUA_REGISTRYINDEX, LUA_RIDX_MAINTHREAD);
+	lua_State* L = lua_tothread(L1, -1);
+	lua_pop(L1, 1);
+	return L;
 }
 
 // Unicode support functions for Windows
