@@ -20,6 +20,7 @@
 */
 
 static int tag = 0;
+static int tagHook = 0;
 
 static int stdcall_closure (lua_State *L1) 
 {
@@ -27,7 +28,7 @@ static int stdcall_closure (lua_State *L1)
 	return function (L1);
 }
 
-LUA_API void lua_pushstdcallcfunction (lua_State *L,lua_stdcallCFunction function) 
+LUA_API void lua_pushstdcallcfunction (lua_State *L, lua_stdcallCFunction function) 
 {
 	lua_pushlightuserdata (L, (void *) function);
 	lua_pushcclosure (L, stdcall_closure, 1);
@@ -183,6 +184,22 @@ LUA_API int luanet_equal (lua_State *L, int idx1, int idx2)
 LUA_API void luanet_pushlstring (lua_State *L, const char *s, size_t len)
 {
 	lua_pushlstring (L, s, len);
+}
+
+static void hook_trampoline (lua_State *L, lua_Debug *ar)
+{
+	lua_pushlightuserdata (L, &tagHook);
+	lua_gettable (L, LUA_REGISTRYINDEX);
+	lua_stdcallHook hook = (lua_stdcallHook) lua_touserdata (L, -1);
+	hook (L, ar);
+}
+
+LUA_API int luanet_sethook (lua_State *L, lua_stdcallHook func, int mask, int count)
+{
+	lua_pushlightuserdata (L, &tagHook);
+	lua_pushlightuserdata (L, func);
+	lua_settable(L, LUA_REGISTRYINDEX);
+	return lua_sethook(L, hook_trampoline, mask, count);
 }
 
 LUA_API lua_State* luanet_get_main_state(lua_State* L1)

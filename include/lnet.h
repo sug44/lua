@@ -16,6 +16,7 @@
 #endif
 
 typedef int (LUA_STDCALL *lua_stdcallCFunction) (lua_State *L);
+typedef void (LUA_STDCALL*lua_stdcallHook) (lua_State *L, lua_Debug *ar);
 
 /*
 ** push stdcall C function
