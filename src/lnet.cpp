@@ -197,7 +197,7 @@ static void hook_trampoline (lua_State *L, lua_Debug *ar)
 LUA_API int luanet_sethook (lua_State *L, lua_stdcallHook func, int mask, int count)
 {
 	lua_pushlightuserdata (L, &tagHook);
-	lua_pushlightuserdata (L, func);
+	lua_pushlightuserdata (L, (void*)func);
 	lua_settable(L, LUA_REGISTRYINDEX);
 	return lua_sethook(L, hook_trampoline, mask, count);
 }
