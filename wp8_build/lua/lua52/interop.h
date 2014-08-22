@@ -422,5 +422,10 @@ namespace lua52
 			return ::luanet_registryindex();
 		}
 
+		static intptr_t LuaNetGetMainState(intptr_t luaState)
+		{
+			return TS(::luanet_get_main_state(TS(luaState)));
+		}
+
 	};
 }

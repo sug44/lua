@@ -66,4 +66,6 @@ LUA_API int luanet_loadfile (lua_State *L, const char *file);
 
 LUA_API int luanet_equal (lua_State *L, int idx, int idx2);
 
+LUA_API lua_State* luanet_get_main_state(lua_State* L1);
+
 #endif /* _LUA_NET_H__ */
