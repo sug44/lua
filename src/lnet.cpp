@@ -210,6 +210,11 @@ LUA_API lua_State* luanet_get_main_state(lua_State* L1)
 	return L;
 }
 
+LUA_API int luanet_isstring_strict(lua_State *L, int idx) {
+	int t = lua_type(L, idx);
+	return (t == LUA_TSTRING);
+}
+
 // Unicode support functions for Windows
 #ifdef WIN32
 

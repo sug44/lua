@@ -68,4 +68,14 @@ LUA_API int luanet_equal (lua_State *L, int idx, int idx2);
 
 LUA_API lua_State* luanet_get_main_state(lua_State* L1);
 
+LUA_API int luanet_isstring_strict(lua_State *L, int idx);
+
+#ifdef WIN32
+
+LUA_API void luanet_pushlwstring(lua_State *L, const wchar_t *s, size_t len);
+
+LUA_API void luanet_pushwstring(lua_State *L, const wchar_t *s);
+
+#endif /* WIN32 */
+
 #endif /* _LUA_NET_H__ */
