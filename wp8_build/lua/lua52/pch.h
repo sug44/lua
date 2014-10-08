@@ -4,8 +4,3 @@
 //
 
 #pragma once
-
-#include "targetver.h"
-
-// Windows Header Files:
-#include <windows.h>
