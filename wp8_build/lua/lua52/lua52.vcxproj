@@ -22,7 +22,7 @@
     <ProjectGuid>{51334677-A80F-40F7-8CFE-5DA0A92AC0C6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>lua52</ProjectName>
-    <RootNamespace>WindowsRuntimeComponent1</RootNamespace>
+    <RootNamespace>lua52</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
