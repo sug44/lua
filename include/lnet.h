@@ -70,7 +70,7 @@ LUA_API lua_State* luanet_get_main_state(lua_State* L1);
 
 LUA_API int luanet_isstring_strict(lua_State *L, int idx);
 
-#ifdef WIN32
+#if defined (WIN32) || defined (WP8)
 
 LUA_API void luanet_pushlwstring(lua_State *L, const wchar_t *s, size_t len);
 

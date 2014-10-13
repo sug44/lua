@@ -7,7 +7,7 @@
 
 #include <string.h>
 
-#if WIN32
+#if defined (WIN32) || defined (WP8)
 #include <Windows.h>
 #include <string>
 #endif
@@ -216,7 +216,7 @@ LUA_API int luanet_isstring_strict(lua_State *L, int idx) {
 }
 
 // Unicode support functions for Windows
-#ifdef WIN32
+#if defined(WIN32) || defined (WP8)
 
 // Convert a wide Unicode string to an UTF8 string
 static std::string utf8_encode(const std::wstring &wstr, size_t size_needed)

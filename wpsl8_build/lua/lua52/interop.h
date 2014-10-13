@@ -24,9 +24,15 @@ namespace lua52
 		inline static lua_State * TS (intptr_t  ptr) {return (lua_State*)(void*) ptr;}
 		inline static intptr_t TC(const char * ptr) { return intptr_t ((void*) ptr); }
 		inline static intptr_t TS(void * ptr) {return intptr_t (ptr); };
+
 		inline static std::string TC (string str) 
 		{
 			return std::string (str->Begin (), str->End ());
+		}
+
+		inline static std::wstring TW(string str)
+		{
+			return std::wstring (str->Begin(), str->End());
 		}
 
 	public:
@@ -269,12 +275,12 @@ namespace lua52
 
 		static void LuaNetPushLString(intptr_t luaState, string str, size_t size)
 		{
-			::luanet_pushlstring(TS(luaState), TC(str).c_str(), size);
+			::luanet_pushlwstring(TS(luaState), TW(str).c_str(), size);
 		}
 
 		static void LuaPushString(intptr_t luaState, string str)
 		{
-			::lua_pushstring(TS(luaState), TC(str).c_str());
+			::luanet_pushwstring(TS(luaState), TW(str).c_str());
 		}
 
 		static int LuaLNewMetatable(intptr_t luaState, string meta)
