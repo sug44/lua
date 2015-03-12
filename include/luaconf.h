@@ -1,5 +1,5 @@
 /*
-** $Id: luaconf.h,v 1.172 2012/05/11 14:14:42 roberto Exp $
+** $Id: luaconf.h,v 1.176.1.2 2013/11/21 17:26:16 roberto Exp $
 ** Configuration file for Lua
 ** See Copyright Notice in lua.h
 */
@@ -44,7 +44,7 @@
 #define LUA_USE_POSIX
 #define LUA_USE_DLOPEN		/* needs an extra library: -ldl */
 #define LUA_USE_READLINE	/* needs some extra libraries */
-#define LUA_USE_STRTODHEX	/* assume 'strtod' handles hexa formats */
+#define LUA_USE_STRTODHEX	/* assume 'strtod' handles hex formats */
 #define LUA_USE_AFORMAT		/* assume 'printf' handles 'aA' specifiers */
 #define LUA_USE_LONGLONG	/* assume support for long long */
 #endif
@@ -58,7 +58,7 @@
 #define LUA_USE_POSIX
 #define LUA_USE_DLOPEN		/* does not need -ldl */
 #define LUA_USE_READLINE	/* needs an extra library: -lreadline */
-#define LUA_USE_STRTODHEX	/* assume 'strtod' handles hexa formats */
+#define LUA_USE_STRTODHEX	/* assume 'strtod' handles hex formats */
 #define LUA_USE_AFORMAT		/* assume 'printf' handles 'aA' specifiers */
 #define LUA_USE_LONGLONG	/* assume support for long long */
 #endif
@@ -159,12 +159,12 @@
 #else
 	#if defined(LUA_BUILD_AS_DLL)
 		#if defined(LUA_CORE) || defined(LUA_LIB)
-			#define LUA_API  __declspec(dllexport)
+#define LUA_API __declspec(dllexport)
 		#else
-			#define LUA_API  __declspec(dllimport)
+#define LUA_API __declspec(dllimport)
 		#endif
 	#else
-		#define LUA_API		extern
+#define LUA_API		extern
 	#endif
 #endif
 
@@ -340,7 +340,7 @@
 
 
 /*
-@@ LUA_INT32 is an signed integer with exactly 32 bits.
+@@ LUA_INT32 is a signed integer with exactly 32 bits.
 @@ LUAI_UMEM is an unsigned integer big enough to count the total
 @* memory used by Lua.
 @@ LUAI_MEM is a signed integer big enough to count the total memory
@@ -364,7 +364,7 @@
 /*
 @@ LUAI_MAXSTACK limits the size of the Lua stack.
 ** CHANGE it if you need a different limit. This limit is arbitrary;
-** its only purpose is to stop Lua to consume unlimited stack
+** its only purpose is to stop Lua from consuming unlimited stack
 ** space (and to reserve some numbers for pseudo-indices).
 */
 #if LUAI_BITSINT >= 32
@@ -428,7 +428,7 @@
 /*
 @@ lua_str2number converts a decimal numeric string to a number.
 @@ lua_strx2number converts an hexadecimal numeric string to a number.
-** In C99, 'strtod' do both conversions. C89, however, has no function
+** In C99, 'strtod' does both conversions. C89, however, has no function
 ** to convert floating hexadecimal strings to numbers. For these
 ** systems, you can leave 'lua_strx2number' undefined and Lua will
 ** provide its own implementation.
@@ -562,4 +562,3 @@
 
 
 #endif
-
