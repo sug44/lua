@@ -388,10 +388,11 @@
 			buildSettings = {
 				ARCHS = (
 					"$(ARCHS_STANDARD_INCLUDING_64_BIT)",
-					i386,
+					x86_64,
 					arm64,
 					armv7,
 					armv7s,
+					i386,
 				);
 				DSTROOT = /tmp/Lua_iPhone.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -405,7 +406,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
+				VALID_ARCHS = "x86_64 arm64 armv7 armv7s i386";
 			};
 			name = Debug;
 		};
@@ -414,10 +415,11 @@
 			buildSettings = {
 				ARCHS = (
 					"$(ARCHS_STANDARD_INCLUDING_64_BIT)",
-					i386,
+					x86_64,
 					arm64,
 					armv7,
 					armv7s,
+					i386,
 				);
 				DSTROOT = /tmp/Lua_iPhone.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -428,7 +430,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
+				VALID_ARCHS = "x86_64 arm64 armv7 armv7s i386";
 			};
 			name = Release;
 		};
