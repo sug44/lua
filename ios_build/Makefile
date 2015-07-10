@@ -9,7 +9,7 @@ libLua52-x86_64.a:
 	$(XBUILD) -project $(PROJECT) -target $(TARGET) -sdk iphonesimulator -arch x86_64 -configuration Release clean build
 	-mv $(PROJECT_ROOT)/build/Release-iphonesimulator/libLua_iPhone.a $@
 libLua52-i386.a:
-	$(XBUILD) -project $(PROJECT) -target $(TARGET) -sdk iphonesimulator -configuration Release clean build
+	$(XBUILD) -project $(PROJECT) -target $(TARGET) -sdk iphonesimulator -arch i386 -configuration Release clean build
 	-mv $(PROJECT_ROOT)/build/Release-iphonesimulator/libLua_iPhone.a $@
 libLua52-arm64.a:
 	$(XBUILD) -project $(PROJECT) -target $(TARGET) -sdk iphoneos -arch arm64 -configuration Release clean build
