@@ -15,6 +15,13 @@ ELSE (CMAKE_SIZEOF_VOID_P EQUAL 8)
 	SET (LIB_SUFFIX "" CACHE STRING "Suffix of the directory name, e.g. 64 for lib64")
 ENDIF (CMAKE_SIZEOF_VOID_P EQUAL 8)
 
+set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
+if (APPLE)
+  set(CMAKE_INSTALL_NAME_DIR "@rpath")
+  set(CMAKE_INSTALL_RPATH "@executable_path/../lib")
+else(UNIX)
+  set(CMAKE_INSTALL_RPATH "\$ORIGIN/../lib")
+endif()
 
 SET(CMAKE_DEBUG_POSTFIX "d")
 SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib${LIB_SUFFIX}" CACHE STRING "Library build output directory")
@@ -51,6 +58,7 @@ ENDIF ()
 IF ( LUA_USE_POSIX )
   # On POSIX Lua links to standard math library "m"
   LIST ( APPEND LIBS m )
+  ADD_DEFINITIONS (-DLUA_USE_POSIX)
 ENDIF ()
 
 IF ( LUA_USE_DLOPEN )
