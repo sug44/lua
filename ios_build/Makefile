@@ -1,28 +1,36 @@
-XBUILD=/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
-PROJECT_ROOT=.
-PROJECT=$(PROJECT_ROOT)/Lua_iPhone.xcodeproj
-TARGET=Lua_iPhone
+.PHONY: all
 
-all: libLua52iOS.a
+all: ios watchos tvos
 
-libLua52-x86_64.a:
-	$(XBUILD) -project $(PROJECT) -target $(TARGET) -sdk iphonesimulator -arch x86_64 -configuration Release clean build
-	-mv $(PROJECT_ROOT)/build/Release-iphonesimulator/libLua_iPhone.a $@
-libLua52-i386.a:
-	$(XBUILD) -project $(PROJECT) -target $(TARGET) -sdk iphonesimulator -arch i386 -configuration Release clean build
-	-mv $(PROJECT_ROOT)/build/Release-iphonesimulator/libLua_iPhone.a $@
-libLua52-arm64.a:
-	$(XBUILD) -project $(PROJECT) -target $(TARGET) -sdk iphoneos -arch arm64 -configuration Release clean build
-	-mv $(PROJECT_ROOT)/build/Release-iphoneos/libLua_iPhone.a $@
-libLua52-armv7.a:
-	$(XBUILD) -project $(PROJECT) -target $(TARGET) -sdk iphoneos -arch armv7 -configuration Release clean build
-	-mv $(PROJECT_ROOT)/build/Release-iphoneos/libLua_iPhone.a $@
-libLua52-armv7s.a:
-	$(XBUILD) -project $(PROJECT) -target $(TARGET) -sdk iphoneos -arch armv7s -configuration Release clean build
-	-mv $(PROJECT_ROOT)/build/Release-iphoneos/libLua_iPhone.a $@
+ios: ./ios/lua53.framework/lua53
+./ios/lua53.framework/lua53:
+	xcodebuild  -project lua.ios.xcodeproj -configuration Release -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+	xcodebuild  -project lua.ios.xcodeproj  -configuration Release -sdk iphoneos ONLY_ACTIVE_ARCH=NO
+	ditto ./Build/Release-iphoneos/ ./ios/
+	rm ./ios/lua53.framework/lua53
+	lipo -create ./build/Release-iphonesimulator/lua53.framework/lua53  ./build/Release-iphoneos/lua53.framework/lua53 -output  ./ios/lua53.framework/lua53
+	/usr/libexec/PlistBuddy -c "Add :CFBundleSupportedPlatforms: string iPhoneSimulator" ./ios/lua53.framework/Info.plist
 
-libLua52iOS.a: libLua52-i386.a libLua52-x86_64.a libLua52-arm64.a libLua52-armv7.a libLua52-armv7s.a
-	lipo -create -output $@ $^
+watchos: ./watchos/lua53.framework/lua53
+./watchos/lua53.framework/lua53:
+	xcodebuild  -project lua.watchos.xcodeproj -configuration Release -sdk watchsimulator ONLY_ACTIVE_ARCH=NO
+	xcodebuild  -project lua.watchos.xcodeproj  -configuration Release -sdk watchos ONLY_ACTIVE_ARCH=NO
+	ditto ./Build/Release-watchos/ ./watchos/
+	rm ./watchos/lua53.framework/lua53
+	lipo -create ./build/Release-watchsimulator/lua53.framework/lua53  ./build/Release-watchos/lua53.framework/lua53 -output  ./watchos/lua53.framework/lua53
+	/usr/libexec/PlistBuddy -c "Add :CFBundleSupportedPlatforms: string WatchSimulator" ./watchos/lua53.framework/Info.plist
+
+tvos: ./tvos/lua53.framework/lua53
+./tvos/lua53.framework/lua53:
+	xcodebuild  -project lua.tvos.xcodeproj -configuration Release -sdk appletvsimulator ONLY_ACTIVE_ARCH=NO
+	xcodebuild  -project lua.tvos.xcodeproj  -configuration Release -sdk appletvos ONLY_ACTIVE_ARCH=NO
+	ditto ./Build/Release-appletvos/ ./tvos/
+	rm ./tvos/lua53.framework/lua53
+	lipo -create ./build/Release-appletvsimulator/lua53.framework/lua53  ./build/Release-appletvos/lua53.framework/lua53 -output  ./tvos/lua53.framework/lua53
+	/usr/libexec/PlistBuddy -c "Add :CFBundleSupportedPlatforms: string AppleTVSimulator" ./tvos/lua53.framework/Info.plist
 
 clean:
-	-rm -f *.a
+	rm -Rf build
+	rm -Rf ./ios/
+	rm -Rf ./watchos/
+	rm -Rf ./tvos/
