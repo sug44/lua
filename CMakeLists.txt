@@ -73,6 +73,13 @@ IF ( LUA_USE_DLOPEN )
 ENDIF ()
 
 IF ( LUA_WIN )
+  # Use static linked runtime for DLL to avoid issues with people without the vcredist installed
+  IF (MSVC)
+    SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
+    SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+    SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+    SET(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_DEBUG} /MT")
+  ENDIF()
   # Add extra rc files to the windows build
   IF ( MSVC OR MINGW )
     SET ( LUA_DLL_RC src/lua_dll.rc )
