@@ -25,7 +25,6 @@
 		1839F9DD21A7BD2B00E8CCB0 /* lua.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1839F9C221A7BD2A00E8CCB0 /* lua.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		1839F9DE21A7BD2B00E8CCB0 /* luaconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 1839F9C321A7BD2B00E8CCB0 /* luaconf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1839F9DF21A7BD2B00E8CCB0 /* lua.h in Headers */ = {isa = PBXBuildFile; fileRef = 1839F9C421A7BD2B00E8CCB0 /* lua.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1839F9E021A7BD2B00E8CCB0 /* lnet.h in Headers */ = {isa = PBXBuildFile; fileRef = 1839F9C521A7BD2B00E8CCB0 /* lnet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1839F9E121A7BD2B00E8CCB0 /* lstate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1839F9C621A7BD2B00E8CCB0 /* lstate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1839F9E221A7BD2B00E8CCB0 /* lvm.h in Headers */ = {isa = PBXBuildFile; fileRef = 1839F9C721A7BD2B00E8CCB0 /* lvm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1839F9E321A7BD2B00E8CCB0 /* lstring.h in Headers */ = {isa = PBXBuildFile; fileRef = 1839F9C821A7BD2B00E8CCB0 /* lstring.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -88,7 +87,6 @@
 		1839F9C221A7BD2A00E8CCB0 /* lua.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = lua.hpp; path = ../include/lua.hpp; sourceTree = "<group>"; };
 		1839F9C321A7BD2B00E8CCB0 /* luaconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = luaconf.h; path = ../include/luaconf.h; sourceTree = "<group>"; };
 		1839F9C421A7BD2B00E8CCB0 /* lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua.h; path = ../include/lua.h; sourceTree = "<group>"; };
-		1839F9C521A7BD2B00E8CCB0 /* lnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lnet.h; path = ../include/lnet.h; sourceTree = "<group>"; };
 		1839F9C621A7BD2B00E8CCB0 /* lstate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lstate.h; path = ../include/lstate.h; sourceTree = "<group>"; };
 		1839F9C721A7BD2B00E8CCB0 /* lvm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lvm.h; path = ../include/lvm.h; sourceTree = "<group>"; };
 		1839F9C821A7BD2B00E8CCB0 /* lstring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lstring.h; path = ../include/lstring.h; sourceTree = "<group>"; };
@@ -130,7 +128,8 @@
 		1839FA0821A7BD3F00E8CCB0 /* lgc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lgc.c; path = ../src/lgc.c; sourceTree = "<group>"; };
 		1839FA0921A7BD3F00E8CCB0 /* ldebug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ldebug.c; path = ../src/ldebug.c; sourceTree = "<group>"; };
 		1839FA0A21A7BD3F00E8CCB0 /* lopcodes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lopcodes.c; path = ../src/lopcodes.c; sourceTree = "<group>"; };
-		18C036B121A7BC8E00B3058F /* lua53.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = lua53.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		183A86EE21C8740B0014215B /* lua53 copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "lua53 copy-Info.plist"; path = "/Users/viniciusjarina/projects/nlua/KeraLua/external/lua/ios_build/lua53 copy-Info.plist"; sourceTree = "<absolute>"; };
+		18C036B121A7BC8E00B3058F /* liblua53.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = liblua53.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18C036B521A7BC8E00B3058F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,13 +151,14 @@
 				18C036BC21A7BCBF00B3058F /* src */,
 				18C036B521A7BC8E00B3058F /* Info.plist */,
 				18C036B221A7BC8E00B3058F /* Products */,
+				183A86EE21C8740B0014215B /* lua53 copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
 		18C036B221A7BC8E00B3058F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18C036B121A7BC8E00B3058F /* lua53.framework */,
+				18C036B121A7BC8E00B3058F /* liblua53.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -217,7 +217,6 @@
 				1839F9CC21A7BD2B00E8CCB0 /* llex.h */,
 				1839F9C921A7BD2B00E8CCB0 /* llimits.h */,
 				1839F9C121A7BD2A00E8CCB0 /* lmem.h */,
-				1839F9C521A7BD2B00E8CCB0 /* lnet.h */,
 				1839F9BC21A7BD2A00E8CCB0 /* lobject.h */,
 				1839F9B921A7BD2A00E8CCB0 /* lopcodes.h */,
 				1839F9B821A7BD2A00E8CCB0 /* lparser.h */,
@@ -253,7 +252,6 @@
 				1839F9CE21A7BD2B00E8CCB0 /* ldo.h in Headers */,
 				1839F9D021A7BD2B00E8CCB0 /* lapi.h in Headers */,
 				1839F9E521A7BD2B00E8CCB0 /* lualib.h in Headers */,
-				1839F9E021A7BD2B00E8CCB0 /* lnet.h in Headers */,
 				1839F9DC21A7BD2B00E8CCB0 /* lmem.h in Headers */,
 				1839F9D321A7BD2B00E8CCB0 /* lparser.h in Headers */,
 				1839F9E221A7BD2B00E8CCB0 /* lvm.h in Headers */,
@@ -277,9 +275,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		18C036B021A7BC8E00B3058F /* lua53 */ = {
+		18C036B021A7BC8E00B3058F /* liblua53 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18C036B921A7BC8E00B3058F /* Build configuration list for PBXNativeTarget "lua53" */;
+			buildConfigurationList = 18C036B921A7BC8E00B3058F /* Build configuration list for PBXNativeTarget "liblua53" */;
 			buildPhases = (
 				18C036AC21A7BC8E00B3058F /* Headers */,
 				18C036AD21A7BC8E00B3058F /* Sources */,
@@ -290,9 +288,9 @@
 			);
 			dependencies = (
 			);
-			name = lua53;
+			name = liblua53;
 			productName = lua53;
-			productReference = 18C036B121A7BC8E00B3058F /* lua53.framework */;
+			productReference = 18C036B121A7BC8E00B3058F /* liblua53.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -321,7 +319,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				18C036B021A7BC8E00B3058F /* lua53 */,
+				18C036B021A7BC8E00B3058F /* liblua53 */,
 			);
 		};
 /* End PBXProject section */
@@ -568,7 +566,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18C036B921A7BC8E00B3058F /* Build configuration list for PBXNativeTarget "lua53" */ = {
+		18C036B921A7BC8E00B3058F /* Build configuration list for PBXNativeTarget "liblua53" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18C036BA21A7BC8E00B3058F /* Debug */,
