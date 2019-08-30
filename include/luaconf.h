@@ -133,7 +133,11 @@
 /*
 ** largest types available for C89 ('long' and 'double')
 */
-#define LUA_INT_TYPE	LUA_INT_LONG
+#if defined(LUA_USE_LONGLONG)
+#define LUA_INT_TYPE	LUA_INT_LONGLONG
+#else
+#define LUA_INT_TYPE    LUA_INT_LONG
+#endif
 #define LUA_FLOAT_TYPE	LUA_FLOAT_DOUBLE
 
 #endif				/* } */
