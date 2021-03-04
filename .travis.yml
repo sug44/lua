@@ -23,7 +23,7 @@ script:
 # Only watch the master branch
 branches:
   only:
-    - master
+    - main
 
 # Notify if needed
 notifications:
