@@ -1,4 +1,4 @@
-This is Lua 5.4.2, released on 13 Nov 2020.
+This is Lua 5.4.3, released on 03 Mar 2021.
 
 [![Build Status](https://secure.travis-ci.org/NLua/lua.svg?branch=master)](https://travis-ci.org/NLua/lua)
 

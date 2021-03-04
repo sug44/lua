@@ -141,7 +141,11 @@
 #if LUAI_IS32INT  /* use 'int' if big enough */
 #define LUA_INT_TYPE	LUA_INT_INT
 #else  /* otherwise use 'long' */
-#define LUA_INT_TYPE	LUA_INT_LONG
+#if defined(LUA_USE_LONGLONG)
+#define LUA_INT_TYPE	LUA_INT_LONGLONG
+#else
+#define LUA_INT_TYPE    LUA_INT_LONG
+#endif
 #endif
 #define LUA_FLOAT_TYPE	LUA_FLOAT_FLOAT
 
@@ -154,6 +158,7 @@
 #else
 #define LUA_INT_TYPE    LUA_INT_LONG
 #endif
+
 #define LUA_FLOAT_TYPE	LUA_FLOAT_DOUBLE
 
 #else		/* }{ */
@@ -675,6 +680,7 @@
 #define lua_getlocaledecpoint()		'.'
 #else
 #define lua_getlocaledecpoint()		(localeconv()->decimal_point[0])
+#endif
 #endif
 
 
