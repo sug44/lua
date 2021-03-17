@@ -155,7 +155,7 @@ end
 dofile('main.lua')
 
 -- trace GC cycles
--- require"tracegc".start()
+require"tracegc".start()
 
 report"gc.lua"
 local f = assert(loadfile('gc.lua'))
