@@ -4,6 +4,7 @@
 # For details see the COPYRIGHT file distributed with LuaDist.
 # Please note that the package source code is licensed under its own license.
 # Changed by Vinicius Jarina (viniciusjarina@gmail.com)
+cmake_minimum_required(VERSION 3.0)
 
 PROJECT ( lua C )
 
