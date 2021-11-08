@@ -21,6 +21,7 @@ tvos: ./tvos/liblua54.framework/liblua54
 	lipo -create ./build/Release-appletvsimulator/liblua54.framework/liblua54  ./build/Release-appletvos/liblua54.framework/liblua54 -output  ./tvos/liblua54.framework/liblua54
 
 maccatalyst: ./maccatalyst/liblua54.framework/liblua54
+./maccatalyst/liblua54.framework/liblua54:
 	xcodebuild -configuration Release -destination "platform=macOS,variant=Mac Catalyst" -project lua.maccatalyst.xcodeproj -scheme liblua54 SYMROOT=build_maccatalyst/
 	ditto ./build_maccatalyst/Release-maccatalyst/liblua54.framework/Versions/A/ ./maccatalyst/liblua54.framework/
 
