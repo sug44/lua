@@ -1,4 +1,4 @@
-This is Lua 5.4.3, released on 15 Mar 2021..
+This is Lua 5.4.4, released on 13 Jan 2022.
 
 [![Build Status](https://dev.azure.com/codefoco/NuGets/_apis/build/status/lua?branchName=main)](https://dev.azure.com/codefoco/NuGets/_build/latest?definitionId=66&branchName=main)
 
