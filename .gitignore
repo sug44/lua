@@ -16,3 +16,4 @@ osx-64
 osx-arm64
 osx
 src/*.o
+.vscode/*
