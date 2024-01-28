@@ -17,3 +17,5 @@ osx-arm64
 osx
 src/*.o
 .vscode/*
+ios_build/build_maccatalyst/*
+ios_build/maccatalyst/*
