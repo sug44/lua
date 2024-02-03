@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -309,7 +309,7 @@
 				};
 			};
 			buildConfigurationList = 18D4F2FE2738DFCE0019B295 /* Build configuration list for PBXProject "lua.maccatalyst" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -526,10 +526,12 @@
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_DYLIB_INSTALL_NAME = "@rpath/liblua54.framework/liblua54";
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@rpath/liblua54.framework/liblua54",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.codefoco.catalyst;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -558,14 +560,16 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@rpath/liblua54.framework/liblua54",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.codefoco.catalyst;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SYMROOT = build;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

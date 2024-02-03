@@ -24,6 +24,9 @@ maccatalyst: ./maccatalyst/liblua54.framework/liblua54
 ./maccatalyst/liblua54.framework/liblua54:
 	xcodebuild -configuration Release -destination "platform=macOS,variant=Mac Catalyst" -project lua.maccatalyst.xcodeproj -scheme liblua54 SYMROOT=build_maccatalyst/
 	ditto ./build_maccatalyst/Release-maccatalyst/liblua54.framework/Versions/A/ ./maccatalyst/liblua54.framework/
+	# Xcode has a bug that ignores -install_name setting and always put the /Versions/A/liblua54 for maccatalyst
+	install_name_tool -id @rpath/liblua54.framework/liblua54 maccatalyst/liblua54.framework/liblua54
+	/usr/bin/codesign --force --sign B9E9AA47A24A9A181461FEA0996D59F6E25B149F -o runtime --timestamp\=none --generate-entitlement-der ./maccatalyst/liblua54.framework/liblua54
 
 clean:
 	rm -Rf build
