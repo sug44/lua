@@ -1008,6 +1008,29 @@ static void body (LexState *ls, expdesc *e, int ismethod, int line) {
   close_func(ls);
 }
 
+static void arrowbody (LexState *ls, expdesc *e, int ismethod, int line) {
+  /* arrowbody -> expr [';'] */
+  FuncState new_fs;
+  BlockCnt bl;
+  new_fs.f = addprototype(ls);
+  new_fs.f->linedefined = line;
+  open_func(ls, &new_fs, &bl);
+  /* stripped out code from (statement > TK_RETURN case > retstat) execution path */
+  enterlevel(ls);
+  FuncState *fs = ls->fs;
+  expdesc se;
+  expr(ls, &se);
+  luaK_ret(fs, luaK_exp2anyreg(fs, &se), 1);
+  testnext(ls, ';');  /* skip optional semicolon */
+  lua_assert(ls->fs->f->maxstacksize >= ls->fs->freereg &&
+             ls->fs->freereg >= luaY_nvarstack(ls->fs));
+  ls->fs->freereg = luaY_nvarstack(ls->fs);  /* free registers */
+  leavelevel(ls);
+  /**/
+  new_fs.f->lastlinedefined = ls->linenumber;
+  codeclosure(ls, e);
+  close_func(ls);
+}
 
 static int explist (LexState *ls, expdesc *v) {
   /* explist -> expr { ',' expr } */
@@ -1181,6 +1204,11 @@ static void simpleexp (LexState *ls, expdesc *v) {
     case TK_FUNCTION: {
       luaX_next(ls);
       body(ls, v, 0, ls->linenumber);
+      return;
+    }
+    case '>': {
+      luaX_next(ls);
+      arrowbody(ls, v, 0, ls->linenumber);
       return;
     }
     default: {
